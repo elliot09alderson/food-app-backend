@@ -1,11 +1,11 @@
 import mongoose, { Schema, Document, mongo } from "mongoose";
-interface FoodDoc extends Document {
+export interface FoodDoc extends Document {
   name: string;
   VendorId: string;
   description: string;
   category: string;
   foodType: string;
-  readtTime: number;
+  readyTime: number;
   price: number;
   images: [string];
 }

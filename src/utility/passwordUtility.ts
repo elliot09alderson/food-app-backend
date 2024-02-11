@@ -5,7 +5,6 @@ import { JWT_SECRET } from "../config";
 import { AuthPayload } from "../dto/Auth.dto";
 import { Request } from "express";
 
-
 export const GenSalt = async () => {
   return await bcrypt.genSalt();
 };
@@ -23,24 +22,21 @@ export const ValidatePassword = async (
   return (await GenEncpass(enteredPassword, salt)) === EncPassword;
 };
 
-export const generateSignature = (payload: VendorPayload) => {
+export const generateSignature = (payload: AuthPayload) => {
   return jwt.sign(payload, JWT_SECRET, { expiresIn: "1d" });
 };
-
-
-
 
 // _________________VALIDATE SIGNATURE ____________________
 export const validateSignature = async (req: Request) => {
   const signature = req.get("Authorization");
-  if (signature) {    
-    const payload = await jwt.verify(
-      signature.split(" ")[1],  
+  if (signature) {
+    const payload = (await jwt.verify(
+      signature.split(" ")[1],
       JWT_SECRET
-    ) as AuthPayload;
+    )) as AuthPayload;
 
     req.user = payload;
-    return true; 
+    return true;
   }
   return false;
 };

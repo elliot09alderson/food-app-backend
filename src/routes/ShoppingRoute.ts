@@ -7,7 +7,7 @@ import {
   SearchFoods,
 } from "../controllers";
 export const ShoppingRouter = express.Router();
-/** -----------------FOOD AVAILABILITY
+/** ----------------- BY FOOD AVAILABILITY
  * -----------------**/
 ShoppingRouter.get("/:pincode", GetFoodByAvailability);
 /** -----------------TOP RESTAURANTS -----------------**/
